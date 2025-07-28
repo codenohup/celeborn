@@ -33,8 +33,6 @@ import org.apache.flink.runtime.io.network.partition.consumer.IndexedInputGate;
 import org.apache.flink.runtime.shuffle.ShuffleDescriptor;
 import org.apache.flink.runtime.shuffle.ShuffleEnvironment;
 import org.apache.flink.runtime.shuffle.ShuffleEnvironmentContext;
-import org.apache.flink.runtime.shuffle.ShuffleMaster;
-import org.apache.flink.runtime.shuffle.ShuffleMasterContext;
 import org.apache.flink.runtime.shuffle.ShuffleServiceFactory;
 import org.apache.flink.runtime.util.ConfigurationParserUtils;
 
@@ -46,12 +44,6 @@ public abstract class AbstractRemoteShuffleServiceFactory
 
   public final NettyShuffleServiceFactory nettyShuffleServiceFactory =
       new NettyShuffleServiceFactory();
-
-  @Override
-  public ShuffleMaster<ShuffleDescriptor> createShuffleMaster(
-      ShuffleMasterContext shuffleMasterContext) {
-    return new RemoteShuffleMaster(shuffleMasterContext, nettyShuffleServiceFactory);
-  }
 
   @Override
   public abstract ShuffleEnvironment<ResultPartitionWriter, IndexedInputGate>

@@ -23,12 +23,21 @@ import org.apache.flink.configuration.Configuration;
 import org.apache.flink.configuration.NettyShuffleEnvironmentOptions;
 import org.apache.flink.runtime.io.network.api.writer.ResultPartitionWriter;
 import org.apache.flink.runtime.io.network.partition.consumer.IndexedInputGate;
+import org.apache.flink.runtime.shuffle.ShuffleDescriptor;
 import org.apache.flink.runtime.shuffle.ShuffleEnvironment;
 import org.apache.flink.runtime.shuffle.ShuffleEnvironmentContext;
+import org.apache.flink.runtime.shuffle.ShuffleMaster;
+import org.apache.flink.runtime.shuffle.ShuffleMasterContext;
 
 import org.apache.celeborn.plugin.flink.netty.NettyShuffleEnvironmentWrapper;
 
 public class RemoteShuffleServiceFactory extends AbstractRemoteShuffleServiceFactory {
+
+  @Override
+  public ShuffleMaster<ShuffleDescriptor> createShuffleMaster(
+      ShuffleMasterContext shuffleMasterContext) {
+    return new RemoteShuffleMaster(shuffleMasterContext, nettyShuffleServiceFactory);
+  }
 
   @Override
   public ShuffleEnvironment<ResultPartitionWriter, IndexedInputGate> createShuffleEnvironment(
