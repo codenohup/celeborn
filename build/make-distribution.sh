@@ -24,7 +24,8 @@ PROJECT_DIR="$(cd "`dirname "$0"`/.."; pwd)"
 DIST_DIR="$PROJECT_DIR/dist"
 NAME="bin"
 RELEASE="false"
-MVN="$PROJECT_DIR/build/mvn"
+#MVN="$PROJECT_DIR/build/mvn"
+MVN=/Users/huangxu/Desktop/softwares/apache-maven-3.8.6/bin/mvn
 SBT="$PROJECT_DIR/build/sbt"
 SBT_ENABLED="false"
 
